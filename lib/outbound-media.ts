@@ -7,7 +7,7 @@ import { basename, extname } from "node:path";
 import type { AnyMessageContent } from "@whiskeysockets/baileys";
 import type { ChannelProvider } from "./provider";
 
-export const PHOTO_EXTS = new Set([".jpg", ".jpeg", ".png", ".gif", ".webp"]);
+export const PHOTO_EXTS = new Set([".jpg", ".jpeg", ".png", ".gif"]);
 
 // Declared mimetype for outbound documents. Android WhatsApp labels and opens an attachment by this
 // value, so "application/octet-stream" shows up as an unopenable "BIN" file.
@@ -53,7 +53,7 @@ export function fileMessage(
 ): AnyMessageContent {
   const ext = extname(path).toLowerCase();
   const cloud = provider === "cloud-api";
-  if (cloud && ext === ".webp") return { sticker: media };
+  if (ext === ".webp") return { sticker: media };
   if (PHOTO_EXTS.has(ext)) return { image: media };
   if ([".mp4", ".mov", ".avi"].includes(ext))
     return { video: media, ...(cloud ? { mimetype: "video/mp4" } : {}) };

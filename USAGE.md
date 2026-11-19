@@ -175,7 +175,7 @@ Inbound **photos** are downloaded eagerly to `~/.whatsapp-channel/inbox/` and th
 
 Other media types (**voice notes, audio, video, documents, stickers**) are lazy — the notification includes an `attachment_file_id`. The assistant calls `download_attachment` to fetch the file on demand.
 
-Outbound, `reply`'s `files` picks the message type from the extension: images send as photos, `.mp4`/`.mov`/`.avi` as video, `.mp3`/`.m4a` as audio, and anything else as a document. On linked device an `.ogg` or `.opus` file that contains Opus goes out as a **voice note** (push-to-talk, the green play button); an `.ogg` holding Vorbis stays a document, since WhatsApp voice notes have to be Opus. To turn other audio into a voice note: `ffmpeg -i in.wav -c:a libopus -b:a 32k -ac 1 note.ogg`. On Cloud API `.ogg` sends as plain audio, as before.
+Outbound, `reply`'s `files` picks the message type from the extension: images send as photos, `.webp` as a sticker, `.mp4`/`.mov`/`.avi` as video, `.mp3`/`.m4a` as audio, and anything else as a document. On linked device an `.ogg` or `.opus` file that contains Opus goes out as a **voice note** (push-to-talk, the green play button); an `.ogg` holding Vorbis stays a document, since WhatsApp voice notes have to be Opus. To turn other audio into a voice note: `ffmpeg -i in.wav -c:a libopus -b:a 32k -ac 1 note.ogg`. On Cloud API `.ogg` sends as plain audio, as before.
 
 ### Restricting which files can be attached
 
