@@ -79,11 +79,14 @@ describe("fileMessage on linked device", () => {
     });
   });
 
+  test("webp is a sticker on linked device", () => {
+    expect(fileMessage("/tmp/a.webp", bytes, "baileys")).toEqual({
+      sticker: bytes,
+    });
+  });
+
   test("photos, videos and documents are unchanged", () => {
     expect(fileMessage("/tmp/a.PNG", bytes, "baileys")).toEqual({
-      image: bytes,
-    });
-    expect(fileMessage("/tmp/a.webp", bytes, "baileys")).toEqual({
       image: bytes,
     });
     expect(fileMessage("/tmp/a.mp4", bytes, "baileys")).toEqual({
